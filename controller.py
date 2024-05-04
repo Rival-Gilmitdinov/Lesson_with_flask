@@ -6,9 +6,17 @@ import re
 
 class Controller:
     def help(self):
+        """Метод открывает файл со справкой
+        Return:
+            возвращает открытый файл"""
         return model.help()
 
     def calculate(self, data):
+        """Метод производит операции по вычислению значений (сложение, вычитание, умножение и деление)
+        Arg:
+            data : словарь, с данными, которые передал пользователь
+        Return:
+            посчитанное значение, либо ошибка с ее описанием"""
         try:
             validator.validate_type(data, dict)
         except TypeError:
@@ -39,6 +47,11 @@ class Controller:
                 return data['figure1'] / data['figure2']
 
     def text_redactor(self, data):
+        """Метод производит операции по редактированию текста
+              Arg:
+                  data : словарь, с данными, которые передал пользователь
+              Return:
+                  измененный тест, либо ошибка с ее описанием"""
         try:
             validator.validate_type(data, dict)
         except TypeError:
@@ -64,6 +77,11 @@ class Controller:
             raise SyntaxError('operation not found')
 
     def parser(self, data):
+        """Метод производит операции по парсингу текст (находит номер телефона или email пользователя)
+              Arg:
+                  data : словарь, с данными, которые передал пользователь
+              Return:
+                    найденный текст или ошибка с ее описанием"""
         try:
             validator.validate_type(data, dict)
         except TypeError:
@@ -77,7 +95,6 @@ class Controller:
             validator.validate_text_type(data)
         except InvalidType as error:
             return error.TEXT_EXCEPTION
-
         if data['operation'] == 'number':
             match = re.findall(r"\+?[\d\s\-\\]+", data['text'])
             return match[0]
