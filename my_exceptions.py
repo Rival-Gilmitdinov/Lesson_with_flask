@@ -1,5 +1,5 @@
-class InvalidSign(Exception):
-    TEXT_EXCEPTION = '''Не удалось определить тип математической операции. 
+class InvalidOperation(Exception):
+    TEXT_EXCEPTION = '''Не удалось определить тип операции. 
     Ознакомиться с доступными типами можно через запрос "/help"'''
 
 
