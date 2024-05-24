@@ -59,11 +59,12 @@ class Controller:
         if value:
             return value
         if data['operation'] == 'number':
-            match = re.findall(r"\+?[\d\s\-\\]+", data['text'])
-            return match[0]
+            match = re.search(r"(?:\+7|8)(?:\(|-|\s)?\d{3}(?:\)|-|\s)?\d{3}(?:-|\s)?(\d{2}(?:-|\s)?){2}",
+                              data['text'])
+            return match.group(0)
         elif data['operation'] == 'email':
-            match = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', data['text'])
-            return match
+            match = re.search(r'[a-zA-Z\d]{10}@(?:mail|yandex|rambler)\.(?:ru|com)', data['text'])
+            return match.group(0)
 
 
 controller = Controller()
